@@ -1,0 +1,16 @@
+
+create a projects.txt. example:
+
+    $ cat projects.txt  # don't use ~ for homedir
+    /path/to/some/project1  # project1 is the proj name
+    /path/to/some/project2  # project2 is the proj name
+
+then you can:
+
+    $ timer start project1
+    # create symlink
+    # create entry in pubweb
+
+    $ timer stop project1
+    # destroy symlink
+    # create entry in pubweb
