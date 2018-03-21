@@ -7,7 +7,7 @@ import time
 
 LOGS_DIR_PATH = '/home/pandu/projects/freelance-timer/logs/'
 PROJECTS_LIST_PATH = '/home/pandu/projects/freelance-timer/projects.txt'
-C_DIR_PATH = '/home/pandu/c/'
+PUBWEB_DIR = '/home/pandu/sandbox-public/'
 
 # Project = namedtuple('Project', 'path name')
 
@@ -31,23 +31,23 @@ def main(args):
 
 def start(name):
     project_paths = get_project_paths()
-    os.chdir(C_DIR_PATH)
+    os.chdir(PUBWEB_DIR)
     try:
         os.symlink(project_paths[name], name)
     except FileExistsError:
         pass
     os.chdir(LOGS_DIR_PATH)
-    append_entry(name, 'start\t' + time.time())
+    append_entry(name, 'start\t' + str(time.time()))
 
 def stop(name):
     project_paths = get_project_paths()
-    os.chdir(C_DIR_PATH)
+    os.chdir(PUBWEB_DIR)
     try:
         os.unlink(name)
-    except FileExistsError:
+    except FileNotFoundError:
         pass
     os.chdir(LOGS_DIR_PATH)
-    append_entry(name, 'stop\t' + time.time())
+    append_entry(name, 'stop\t' + str(time.time()))
 
 def append_entry(path, text):
     with open(path, 'a') as f:
